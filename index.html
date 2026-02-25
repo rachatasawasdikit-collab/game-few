@@ -1,0 +1,2210 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกมฝึกทักษะเลขยกกำลัง - คณิตศาสตร์ ม.4</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --math-blue: #2980b9;
+            --math-green: #27ae60;
+            --math-purple: #8e44ad;
+            --cream-bg: #FFF8E1;
+            --cream-border: #FFD54F;
+            --cream-dark: #5D4037;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .class-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent), #c0392b);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            margin-top: 15px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Game Modes */
+        .game-modes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .mode-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .mode-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .mode-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary);
+        }
+
+        .mode-card.active {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, #f5f7ff, #e3e9ff);
+            transform: translateY(-5px);
+        }
+
+        .mode-card.active::before {
+            transform: scaleX(1);
+        }
+
+        .mode-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .mode-card:hover .mode-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .mode-title {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .mode-desc {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .mode-difficulty {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .easy { background: #d4edda; color: #155724; }
+        .medium { background: #fff3cd; color: #856404; }
+        .hard { background: #f8d7da; color: #721c24; }
+        .expert { background: #d1ecf1; color: #0c5460; }
+
+        /* Main Game Area */
+        .game-area {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, rgba(52, 152, 219, 0.1), rgba(231, 76, 60, 0.1));
+            border-radius: 50%;
+            transform: translate(100px, -100px);
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .game-title {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .game-title i {
+            color: var(--accent);
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--light), #fff);
+            padding: 15px 25px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            min-width: 140px;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-box i {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 2px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin: 30px 0;
+            background: var(--light);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255,255,255,0.3), 
+                transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Question Area */
+        .question-area {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 35px;
+            margin-bottom: 30px;
+            text-align: center;
+            border-left: 8px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-area::before {
+            content: '?';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 120px;
+            color: rgba(52, 152, 219, 0.05);
+            font-weight: bold;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .question-text {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            line-height: 1.5;
+        }
+
+        .math-expression-container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px auto;
+            max-width: 600px;
+            border: 2px solid #e0e0e0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .math-expression {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--math-blue);
+            margin: 15px 0;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .expression-label {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Options Grid */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .option {
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option::before {
+            content: attr(data-letter);
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
+            background: #f8fafc;
+        }
+
+        .option.selected {
+            border-color: var(--warning);
+            background: #fff8e1;
+            transform: translateY(-3px);
+        }
+
+        .option.correct {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border-color: var(--success);
+            color: #155724;
+            animation: pulseCorrect 0.5s;
+        }
+
+        @keyframes pulseCorrect {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .option.incorrect {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            border-color: var(--accent);
+            color: #721c24;
+        }
+
+        .option:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px solid var(--light);
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 180px;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 0.3;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #2980b9);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: linear-gradient(135deg, #2980b9, #1c5d87);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #27ae60);
+            color: white;
+        }
+
+        .btn-success:hover:not(:disabled) {
+            background: linear-gradient(135deg, #27ae60, #219653);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #c0392b);
+            color: white;
+        }
+
+        .btn-accent:hover:not(:disabled) {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #e67e22);
+            color: white;
+        }
+
+        .btn-warning:hover:not(:disabled) {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            box-shadow: 0 10px 20px rgba(243, 156, 18, 0.4);
+        }
+
+        /* Formula Reference */
+        .formula-box {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-top: 8px solid var(--warning);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formula-box::before {
+            content: '∑';
+            position: absolute;
+            bottom: -30px;
+            right: 20px;
+            font-size: 150px;
+            color: rgba(243, 156, 18, 0.05);
+            font-weight: bold;
+        }
+
+        .formula-title {
+            color: var(--secondary);
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .formula-title i {
+            color: var(--warning);
+            font-size: 1.8rem;
+        }
+
+        .formulas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .formula-item {
+            background: linear-gradient(135deg, #f8f9fa, #fff);
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Cambria Math', serif;
+            font-size: 1.2rem;
+            border-left: 5px solid var(--math-purple);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .formula-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Explanation Box */
+        .explanation-box {
+            background: linear-gradient(135deg, #e8f4f8, #d1ecf1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+            border-left: 5px solid var(--math-blue);
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .explanation-box.show {
+            display: block;
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .explanation-header i {
+            color: var(--math-blue);
+            font-size: 1.5rem;
+        }
+
+        .explanation-header h3 {
+            color: var(--secondary);
+            font-size: 1.3rem;
+        }
+
+        .explanation-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #2c3e50;
+        }
+
+        .step {
+            margin: 15px 0;
+            padding-left: 25px;
+            border-left: 3px solid var(--math-green);
+            background: rgba(255,255,255,0.5);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        /* Hint Box */
+        .hint-box {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--warning);
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hint-box.show {
+            display: block;
+        }
+
+        .hint-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .hint-header i {
+            color: var(--warning);
+        }
+
+        /* Result Screen */
+        .result-screen {
+            text-align: center;
+            padding: 50px 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-screen::before {
+            content: '🏆';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 120px;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .result-title {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .result-score {
+            font-size: 5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 30px 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.1);
+            animation: scorePop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes scorePop {
+            0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .result-message {
+            font-size: 1.4rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .result-stat {
+            background: linear-gradient(135deg, #f8f9fa, #fff);
+            padding: 25px 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .result-stat:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-value {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--dark);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .accuracy-bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin: 20px auto;
+            overflow: hidden;
+            max-width: 500px;
+        }
+
+        .accuracy-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--primary));
+            width: 0%;
+            transition: width 1.5s ease-out;
+        }
+
+        /* Group Info - กรอบสมาชิกกลุ่ม */
+        .group-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--cream-bg), #FFECB3);
+            border: 2px solid var(--cream-border);
+            border-radius: 12px;
+            padding: 15px;
+            font-family: 'Kanit', sans-serif;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            width: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            opacity: 0.85;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(8px);
+        }
+        
+        .group-info:hover {
+            opacity: 1;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #FFFDE7, #FFF9C4);
+        }
+        
+        .group-header {
+            color: var(--cream-dark);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #FFB74D;
+        }
+        
+        .group-header i {
+            color: #FF9800;
+            font-size: 1.2rem;
+        }
+        
+        .members {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        
+        .member-row {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 10px;
+            align-items: center;
+            padding: 6px 8px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .member-row:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateX(5px);
+            border-left: 3px solid #FF9800;
+        }
+        
+        .member-number {
+            color: #FF9800;
+            font-weight: 600;
+            font-size: 0.85rem;
+            min-width: 20px;
+        }
+        
+        .member-name {
+            color: #4E342E;
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .member-id {
+            color: #795548;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(121, 85, 72, 0.1);
+            padding: 2px 6px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        
+        .class-info {
+            color: #795548;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-top: 10px;
+            border-top: 2px solid #FFB74D;
+            justify-content: center;
+            background: rgba(255, 213, 79, 0.2);
+            padding: 8px;
+            border-radius: 6px;
+        }
+        
+        .class-info i {
+            color: #8D6E63;
+            font-size: 1rem;
+        }
+        
+        /* Scrollbar สำหรับกรอบสมาชิกกลุ่ม */
+        .group-info::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .group-info::-webkit-scrollbar-track {
+            background: rgba(255, 213, 79, 0.1);
+            border-radius: 3px;
+        }
+        
+        .group-info::-webkit-scrollbar-thumb {
+            background: #FFB74D;
+            border-radius: 3px;
+        }
+        
+        .group-info::-webkit-scrollbar-thumb:hover {
+            background: #FF9800;
+        }
+        
+        /* สำหรับหน้าจอขนาดเล็ก */
+        @media (max-width: 1024px) {
+            .group-info {
+                width: 280px;
+            }
+        }
+        
+        /* ซ่อนเมื่อหน้าจอเล็กมาก เพื่อไม่ให้บังเนื้อหา */
+        @media (max-width: 768px) {
+            .group-info {
+                display: none;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .game-modes { grid-template-columns: repeat(2, 1fr); }
+            .options-grid { grid-template-columns: repeat(2, 1fr); }
+            .result-stats { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .game-modes { grid-template-columns: 1fr; }
+            .options-grid { grid-template-columns: 1fr; }
+            .stats { justify-content: center; }
+            .stat-box { min-width: 120px; padding: 12px 20px; }
+            .math-expression { font-size: 2rem; }
+            .btn { min-width: 160px; padding: 14px 24px; }
+            .result-stats { grid-template-columns: 1fr; }
+            .formulas-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 { font-size: 1.8rem; }
+            .game-title { font-size: 1.5rem; }
+            .question-text { font-size: 1.3rem; }
+            .math-expression { font-size: 1.8rem; }
+            .controls { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 300px; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(45deg, var(--primary), var(--accent)); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(45deg, var(--accent), var(--primary)); }
+
+        /* Loading Animation */
+        .loading { display: flex; justify-content: center; align-items: center; height: 200px; }
+        .spinner { width: 50px; height: 50px; border: 5px solid var(--light); border-top: 5px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Achievement Badges */
+        .achievement { display: inline-block; background: linear-gradient(45deg, #ffd700, #ffed4e); color: #856404; padding: 8px 16px; border-radius: 20px; font-weight: bold; margin: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
+    </style>
+</head>
+<body>
+    <div class="group-info">
+        <div class="group-header">
+            <i class="fas fa-users"></i> สมาชิกกลุ่ม
+        </div>
+        <div class="members">
+            <div class="member-row">
+                <span class="member-number">1.</span>
+                <span class="member-name">นายกิตติ์ธนทัต คงถนอม </span>
+                <span class="member-id">เลขที่ 1 </span>
+            </div>
+            <div class="member-row">
+                <span class="member-number">2.</span>
+                <span class="member-name">นายชนะชัย แสงสี </span>
+                <span class="member-id">เลขที่ 3</span>
+            </div>
+            <div class="member-row">
+                <span class="member-number">3.</span>
+                <span class="member-name">นายชิณณพัฒน์ ภักดีเจริญ </span>
+                <span class="member-id">เลขที่ 4</span>
+            </div>
+            <div class="member-row">
+                <span class="member-number">4.</span>
+                <span class="member-name">นายญาณวุฒิ บุญยงค์ </span>
+                <span class="member-id">เลขที่ 5</span>
+            </div>
+            <div class="member-row">
+                <span class="member-number">5.</span>
+                <span class="member-name">นายนรวัฒน์ ทองเหลือง </span>
+                <span class="member-id">เลขที่ 10</span>
+            </div>
+            <div class="member-row">
+                <span class="member-number">6.</span>
+                <span class="member-name">นางสาวชญาดา สุขชัยศรี </span>
+                <span class="member-id">เลขที่ 22</span>
+            </div>
+            <div class="member-row">
+                <span class="member-number">7.</span>
+                <span class="member-name">นางสาวธันยารัตน์ วงศ์จรัสเกษม</span>
+                <span class="member-id">เลขที่ 38</span>
+            </div>
+        </div>
+        <div class="class-info">
+            <i class="fas fa-graduation-cap"></i> กลุ่มคณิตศาสตร์ ม.4
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-calculator"></i>
+                <h1>เกมฝึกทักษะเลขยกกำลัง ม.4</h1>
+            </div>
+            <div class="class-badge">ระดับชั้นมัธยมศึกษาปีที่ 4</div>
+            <p class="subtitle">เสนอ ครูปภัสสร์รัตน์ ปรัชญลักษณ์</p>
+        </header>
+
+        <div class="game-modes">
+            <div class="mode-card active" data-mode="basic">
+                <div class="mode-icon">
+                    <i class="fas fa-school"></i>
+                </div>
+                <h3 class="mode-title">พื้นฐานเลขยกกำลัง</h3>
+                <p class="mode-desc">ฝึกการคำนวณเลขยกกำลังพื้นฐานตามบทที่ 1</p>
+                <div class="difficulty-indicator">
+                    <span class="difficulty-dot active"></span>
+                    <span class="difficulty-dot"></span>
+                    <span class="difficulty-dot"></span>
+                </div>
+                <span class="mode-difficulty easy">EASY</span>
+            </div>
+
+            <div class="mode-card" data-mode="algebra">
+                <div class="mode-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="mode-title">เลขยกกำลัง</h3>
+                <p class="mode-desc">ใช้สูตรคณิตกับเลขยกกำลัง</p>
+                <div class="difficulty-indicator">
+                    <span class="difficulty-dot active"></span>
+                    <span class="difficulty-dot active"></span>
+                    <span class="difficulty-dot"></span>
+                </div>
+                <span class="mode-difficulty medium">NORMAL</span>
+            </div>
+
+            <div class="mode-card" data-mode="challenge">
+                <div class="mode-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3 class="mode-title">โจทย์ท้าทาย</h3>
+                <p class="mode-desc">โจทย์ยากระดับข้อสอบแข่งขัน</p>
+                <div class="difficulty-indicator">
+                    <span class="difficulty-dot active"></span>
+                    <span class="difficulty-dot active"></span>
+                    <span class="difficulty-dot active"></span>
+                </div>
+                <span class="mode-difficulty hard">HARD</span>
+            </div>
+
+            <div class="mode-card" data-mode="exam">
+                <div class="mode-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3 class="mode-title">แบบทดสอบปลายภาค</h3>
+                <p class="mode-desc">รวมโจทย์ทุกรูปแบบ จับเวลาข้อละ 1 นาที</p>
+                <div class="difficulty-indicator">
+                    <span class="difficulty-dot active"></span>
+                    <span class="difficulty-dot active"></span>
+                    <span class="difficulty-dot active"></span>
+                </div>
+                <span class="mode-difficulty expert"> VERY HARD</span>
+            </div>
+        </div>
+
+        <div class="game-area" id="gameArea">
+            <div class="game-header">
+                <h2 class="game-title">
+                    <i class="fas fa-gamepad"></i>
+                    <span id="gameTitle">พื้นฐานเลขยกกำลัง</span>
+                </h2>
+                <div class="stats">
+                    <div class="stat-box">
+                        <i class="fas fa-star"></i>
+                        <div>
+                            <div class="stat-value" id="score">0</div>
+                            <div class="stat-label">คะแนน</div>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <div class="stat-value" id="correct">0</div>
+                            <div class="stat-label">ถูก</div>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-times-circle"></i>
+                        <div>
+                            <div class="stat-value" id="wrong">0</div>
+                            <div class="stat-label">ผิด</div>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <div class="stat-value" id="time">0</div>
+                            <div class="stat-label">วินาที</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>ความคืบหน้า</span>
+                    <span id="progressText">0/0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <div class="question-area">
+                <div class="question-number" id="questionNumber">ข้อที่ 1</div>
+                <h3 class="question-text" id="questionText">คำถามจะปรากฏที่นี่</h3>
+                
+                <div class="math-expression-container">
+                    <span class="expression-label">โจทย์:</span>
+                    <div class="math-expression" id="mathExpression">a²</div>
+                </div>
+
+                <div class="options-grid" id="optionsGrid">
+                    </div>
+
+                <div class="hint-box" id="hintBox">
+                    <div class="hint-header">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>คำใบ้:</h3>
+                    </div>
+                    <p id="hintContent">เนื้อหาคำใบ้</p>
+                </div>
+
+                <div class="explanation-box" id="explanationBox">
+                    <div class="explanation-header">
+                        <i class="fas fa-info-circle"></i>
+                        <h3>คำอธิบายและเฉลยละเอียด:</h3>
+                    </div>
+                    <div class="explanation-content" id="explanationContent">
+                        </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn btn-success" id="submitBtn" disabled>
+                    <i class="fas fa-check"></i> ยืนยันคำตอบ
+                </button>
+                <button class="btn btn-primary" id="nextBtn" disabled>
+                    <i class="fas fa-forward"></i> ข้อต่อไป
+                </button>
+                <button class="btn btn-warning" id="hintBtn">
+                    <i class="fas fa-lightbulb"></i> คำใบ้ (ใช้ได้ 3 ครั้ง)
+                </button>
+                <button class="btn btn-accent" id="restartBtn">
+                    <i class="fas fa-redo"></i> เริ่มเกมใหม่
+                </button>
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <h3 class="formula-title">
+                <i class="fas fa-book"></i> สูตรเลขยกกำลังที่ต้องรู้สำหรับ ม.4
+            </h3>
+            <div class="formulas-grid">
+                <div class="formula-item">1. aᵐ × aⁿ = aᵐ⁺ⁿ</div>
+                <div class="formula-item">2. aᵐ ÷ aⁿ = aᵐ⁻ⁿ</div>
+                <div class="formula-item">3. (aᵐ)ⁿ = aᵐⁿ</div>
+                <div class="formula-item">4. (ab)ⁿ = aⁿbⁿ</div>
+                <div class="formula-item">5. (a/b)ⁿ = aⁿ/bⁿ</div>
+                <div class="formula-item">6. a⁻ⁿ = 1/aⁿ</div>
+                <div class="formula-item">7. a⁰ = 1 (เมื่อ a ≠ 0)</div>
+                <div class="formula-item">8. a^(m/n) = ⁿ√(aᵐ) = (ⁿ√a)ᵐ</div>
+                <div class="formula-item">9. a^(1/n) = ⁿ√a</div>
+                <div class="formula-item">10. √(a²) = |a|</div>
+                <div class="formula-item">11. a⁻ᵐ/ⁿ = 1/(ⁿ√(aᵐ))</div>
+                <div class="formula-item">12. a¹ = a</div>
+            </div>
+            <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid var(--accent);">
+                <i class="fas fa-exclamation-circle" style="color: var(--accent);"></i> 
+                <strong>ข้อควรระวัง:</strong> 
+                อย่าลืมว่า 0⁰ ไม่นิยามทางคณิตศาสตร์ และฐานของเลขยกกำลังต้องเป็นจำนวนจริง
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ข้อมูลคำถามสำหรับแต่ละโหมด
+        const questionData = {
+            basic: [
+                {
+                    question: "ข้อใดมีค่าเท่ากับ 2⁵?",
+                    expression: "2⁵",
+                    options: ["10", "25", "32", "64"],
+                    correct: 2,
+                    explanation: "2⁵ หมายถึง 2 คูณกัน 5 ตัว คือ 2 × 2 × 2 × 2 × 2 = 32",
+                    hint: "2 × 2 = 4, 4 × 2 = 8, ...",
+                    formulaUsed: "aⁿ = a × a × ... × a (n ครั้ง)",
+                    timeLimit: 30
+                },
+                {
+                    question: "3² × 3³ มีค่าเท่ากับข้อใด?",
+                    expression: "3² × 3³",
+                    options: ["3⁵", "3⁶", "9⁵", "9⁶"],
+                    correct: 0,
+                    explanation: "ตามสูตร aᵐ × aⁿ = aᵐ⁺ⁿ ดังนั้น 3² × 3³ = 3²⁺³ = 3⁵",
+                    hint: "ฐานเดียวกันให้นำเลขชี้กำลังมาบวกกัน",
+                    formulaUsed: "aᵐ × aⁿ = aᵐ⁺ⁿ",
+                    timeLimit: 35
+                },
+                {
+                    question: "5⁴ ÷ 5² มีค่าเท่ากับข้อใด?",
+                    expression: "5⁴ ÷ 5²",
+                    options: ["1", "5²", "5⁶", "25"],
+                    correct: 1,
+                    explanation: "ตามสูตร aᵐ ÷ aⁿ = aᵐ⁻ⁿ ดังนั้น 5⁴ ÷ 5² = 5⁴⁻² = 5² = 25",
+                    hint: "ฐานเดียวกันให้นำเลขชี้กำลังมาลบกัน",
+                    formulaUsed: "aᵐ ÷ aⁿ = aᵐ⁻ⁿ",
+                    timeLimit: 40
+                },
+                {
+                    question: "(2³)² มีค่าเท่ากับข้อใด?",
+                    expression: "(2³)²",
+                    options: ["2⁵", "2⁶", "4⁶", "4⁵"],
+                    correct: 1,
+                    explanation: "ตามสูตร (aᵐ)ⁿ = aᵐⁿ ดังนั้น (2³)² = 2³×² = 2⁶ = 64",
+                    hint: "เลขยกกำลังซ้อนกันให้นำเลขชี้กำลังมาคูณกัน",
+                    formulaUsed: "(aᵐ)ⁿ = aᵐⁿ",
+                    timeLimit: 45
+                },
+                {
+                    question: "10⁻² มีค่าเท่ากับเท่าใด?",
+                    expression: "10⁻²",
+                    options: ["-100", "-0.01", "0.01", "100"],
+                    correct: 2,
+                    explanation: "ตามสูตร a⁻ⁿ = 1/aⁿ ดังนั้น 10⁻² = 1/10² = 1/100 = 0.01",
+                    hint: "เลขชี้กำลังติดลบให้กลับเศษเป็นส่วน",
+                    formulaUsed: "a⁻ⁿ = 1/aⁿ",
+                    timeLimit: 50
+                },
+                {
+                    question: "4³ มีค่าเท่ากับเท่าใด?",
+                    expression: "4³",
+                    options: ["12", "16", "64", "256"],
+                    correct: 2,
+                    explanation: "4³ = 4 × 4 × 4 = 64",
+                    hint: "4³ = 4² × 4 = 16 × 4 = 64",
+                    formulaUsed: "aⁿ = a × a × ... × a (n ครั้ง)",
+                    timeLimit: 35
+                },
+                {
+                    question: "8² มีค่าเท่ากับเท่าใด?",
+                    expression: "8²",
+                    options: ["16", "64", "128", "256"],
+                    correct: 1,
+                    explanation: "8² = 8 × 8 = 64",
+                    hint: "8 × 8 = 64",
+                    formulaUsed: "aⁿ = a × a × ... × a (n ครั้ง)",
+                    timeLimit: 30
+                },
+                {
+                    question: "(-3)² มีค่าเท่ากับเท่าใด?",
+                    expression: "(-3)²",
+                    options: ["-6", "-9", "6", "9"],
+                    correct: 3,
+                    explanation: "(-3)² = (-3) × (-3) = 9 (ลบคูณลบเป็นบวก)",
+                    hint: "จำนวนลบยกกำลังคู่จะได้ค่าบวก",
+                    formulaUsed: "(-a)²ⁿ = a²ⁿ",
+                    timeLimit: 40
+                },
+                {
+                    question: "-3² มีค่าเท่ากับเท่าใด?",
+                    expression: "-3²",
+                    options: ["-6", "-9", "6", "9"],
+                    correct: 1,
+                    explanation: "-3² = -(3 × 3) = -9 (สังเกตว่าเครื่องหมายลบอยู่นอกการยกกำลัง)",
+                    hint: "ยกกำลังก่อนแล้วค่อยติดลบ",
+                    formulaUsed: "-aⁿ ≠ (-a)ⁿ",
+                    timeLimit: 40
+                },
+                {
+                    question: "7⁰ มีค่าเท่ากับเท่าใด?",
+                    expression: "7⁰",
+                    options: ["0", "1", "7", "หาค่าไม่ได้"],
+                    correct: 1,
+                    explanation: "จำนวนใดๆ (ที่ไม่ใช่ศูนย์) ยกกำลังศูนย์เท่ากับ 1",
+                    hint: "a⁰ = 1 เมื่อ a ≠ 0",
+                    formulaUsed: "a⁰ = 1",
+                    timeLimit: 25
+                }
+            ],
+            algebra: [
+                {
+                    question: "x³ × x⁴ มีค่าเท่ากับข้อใด?",
+                    expression: "x³ × x⁴",
+                    options: ["x⁷", "x¹²", "2x⁷", "x"],
+                    correct: 0,
+                    explanation: "ตามสูตร aᵐ × aⁿ = aᵐ⁺ⁿ ดังนั้น x³ × x⁴ = x³⁺⁴ = x⁷",
+                    hint: "ฐานเดียวกันให้นำเลขชี้กำลังมาบวกกัน",
+                    formulaUsed: "aᵐ × aⁿ = aᵐ⁺ⁿ",
+                    timeLimit: 35
+                },
+                {
+                    question: "(y²)³ มีค่าเท่ากับข้อใด?",
+                    expression: "(y²)³",
+                    options: ["y⁵", "y⁶", "y⁸", "y⁹"],
+                    correct: 1,
+                    explanation: "ตามสูตร (aᵐ)ⁿ = aᵐⁿ ดังนั้น (y²)³ = y²×³ = y⁶",
+                    hint: "เลขยกกำลังซ้อนกันให้นำเลขชี้กำลังมาคูณกัน",
+                    formulaUsed: "(aᵐ)ⁿ = aᵐⁿ",
+                    timeLimit: 40
+                },
+                {
+                    question: "b⁵ ÷ b² มีค่าเท่ากับข้อใด?",
+                    expression: "b⁵ ÷ b²",
+                    options: ["b³", "b⁷", "b¹⁰", "b².⁵"],
+                    correct: 0,
+                    explanation: "ตามสูตร aᵐ ÷ aⁿ = aᵐ⁻ⁿ ดังนั้น b⁵ ÷ b² = b⁵⁻² = b³",
+                    hint: "ฐานเดียวกันให้นำเลขชี้กำลังมาลบกัน",
+                    formulaUsed: "aᵐ ÷ aⁿ = aᵐ⁻ⁿ",
+                    timeLimit: 35
+                },
+                {
+                    question: "(3x)² มีค่าเท่ากับข้อใด?",
+                    expression: "(3x)²",
+                    options: ["3x²", "6x²", "9x²", "9x"],
+                    correct: 2,
+                    explanation: "ตามสูตร (ab)ⁿ = aⁿbⁿ ดังนั้น (3x)² = 3² × x² = 9x²",
+                    hint: "กระจายเลขชี้กำลังเข้าไปคูณทั้ง 3 และ x",
+                    formulaUsed: "(ab)ⁿ = aⁿbⁿ",
+                    timeLimit: 45
+                },
+                {
+                    question: "(a/b)³ มีค่าเท่ากับข้อใด?",
+                    expression: "(a/b)³",
+                    options: ["a³/b", "a/b³", "a³/b³", "3a/3b"],
+                    correct: 2,
+                    explanation: "ตามสูตร (a/b)ⁿ = aⁿ/bⁿ ดังนั้น (a/b)³ = a³/b³",
+                    hint: "กระจายเลขชี้กำลังเข้าไปทั้งเศษและส่วน",
+                    formulaUsed: "(a/b)ⁿ = aⁿ/bⁿ",
+                    timeLimit: 45
+                },
+                {
+                    question: "ข้อใดมีค่าเท่ากับ x⁻³?",
+                    expression: "x⁻³",
+                    options: ["-x³", "1/x³", "-1/x³", "-3x"],
+                    correct: 1,
+                    explanation: "ตามสูตร a⁻ⁿ = 1/aⁿ ดังนั้น x⁻³ = 1/x³",
+                    hint: "เลขชี้กำลังติดลบให้กลับเศษเป็นส่วน",
+                    formulaUsed: "a⁻ⁿ = 1/aⁿ",
+                    timeLimit: 40
+                },
+                {
+                    question: "(xy)⁰ มีค่าเท่ากับข้อใด (เมื่อ xy ≠ 0)?",
+                    expression: "(xy)⁰",
+                    options: ["0", "1", "xy", "x"],
+                    correct: 1,
+                    explanation: "จำนวนใดๆ (ที่ไม่ใช่ศูนย์) ยกกำลังศูนย์เท่ากับ 1",
+                    hint: "อะไรก็ตามยกกำลังศูนย์ได้ 1",
+                    formulaUsed: "a⁰ = 1",
+                    timeLimit: 30
+                },
+                {
+                    question: "(2a³)(3a²)",
+                    expression: "(2a³)(3a²)",
+                    options: ["5a⁵", "6a⁵", "6a⁶", "5a⁶"],
+                    correct: 1,
+                    explanation: "(2a³)(3a²) = (2×3)(a³×a²) = 6a³⁺² = 6a⁵",
+                    hint: "คูณสัมประสิทธิ์ก่อน แล้วคูณตัวแปรโดยนำเลขชี้กำลังมาบวกกัน",
+                    formulaUsed: "aᵐ × aⁿ = aᵐ⁺ⁿ",
+                    timeLimit: 50
+                }
+            ],
+            challenge: [
+                {
+                    question: "ถ้า 2ˣ = 32 และ 3ʸ = 27 แล้ว x + y มีค่าเท่าใด?",
+                    expression: "x + y",
+                    options: ["7", "8", "9", "10"],
+                    correct: 1,
+                    explanation: "2ˣ = 32 = 2⁵ → x = 5\n3ʸ = 27 = 3³ → y = 3\nดังนั้น x + y = 5 + 3 = 8",
+                    hint: "หาค่า x และ y แยกกันก่อน",
+                    formulaUsed: "ถ้า aᵐ = aⁿ แล้ว m = n",
+                    timeLimit: 60
+                },
+                {
+                    question: "รากที่สองของ 4³ มีค่าเท่าใด?",
+                    expression: "√(4³)",
+                    options: ["4", "8", "16", "32"],
+                    correct: 1,
+                    explanation: "√(4³) = (4³)^(1/2) = 4^(3/2) = (√4)³ = 2³ = 8",
+                    hint: "ใช้สูตร √(aᵐ) = aᵐ/²",
+                    formulaUsed: "√(aᵐ) = aᵐ/²",
+                    timeLimit: 65
+                },
+                {
+                    question: "3² × 9³ ÷ 27² มีค่าเท่าใด?",
+                    expression: "3² × 9³ ÷ 27²",
+                    options: ["1", "3", "9", "27"],
+                    correct: 1,
+                    explanation: "3² × (3²)³ ÷ (3³)² = 3² × 3⁶ ÷ 3⁶ = 3² = 9",
+                    hint: "ทำให้ฐานทั้งหมดเป็น 3 ก่อน",
+                    formulaUsed: "aᵐ × aⁿ = aᵐ⁺ⁿ และ aᵐ ÷ aⁿ = aᵐ⁻ⁿ",
+                    timeLimit: 70
+                },
+                {
+                    question: "(5⁷ × 25²) ÷ 125³ มีค่าเท่าใด?",
+                    expression: "(5⁷ × 25²) ÷ 125³",
+                    options: ["1", "5", "25", "125"],
+                    correct: 2,
+                    explanation: "5⁷ × (5²)² ÷ (5³)³ = 5⁷ × 5⁴ ÷ 5⁹ = 5¹¹ ÷ 5⁹ = 5² = 25",
+                    hint: "เขียน 25 และ 125 ในรูปเลขยกกำลังฐาน 5",
+                    formulaUsed: "aᵐ × aⁿ = aᵐ⁺ⁿ และ aᵐ ÷ aⁿ = aᵐ⁻ⁿ",
+                    timeLimit: 75
+                },
+                {
+                    question: "8^(2/3) มีค่าเท่าใด?",
+                    expression: "8^(2/3)",
+                    options: ["2", "4", "8", "16"],
+                    correct: 1,
+                    explanation: "8^(2/3) = (8^(1/3))² = (³√8)² = 2² = 4",
+                    hint: "เปลี่ยน 8 เป็น 2³ แล้วคำนวณ",
+                    formulaUsed: "a^(m/n) = (ⁿ√a)ᵐ",
+                    timeLimit: 60
+                },
+                {
+                    question: "ข้อใดมีค่ามากที่สุด?",
+                    expression: "เปรียบเทียบค่า",
+                    options: ["2⁵⁰", "3⁴⁰", "4³⁰", "5²⁰"],
+                    correct: 1,
+                    explanation: "ทำเลขชี้กำลังให้เท่ากัน (หา ห.ร.ม. ของเลขชี้กำลังคือ 10)\n2⁵⁰ = (2⁵)¹⁰ = 32¹⁰\n3⁴⁰ = (3⁴)¹⁰ = 81¹⁰ (มากที่สุด)\n4³⁰ = (4³)¹⁰ = 64¹⁰\n5²⁰ = (5²)¹⁰ = 25¹⁰",
+                    hint: "ทำเลขชี้กำลังให้เท่ากันโดยดึงตัวร่วมออก",
+                    formulaUsed: "เปรียบเทียบโดยทำเลขชี้กำลังให้เท่ากัน",
+                    timeLimit: 90
+                },
+                {
+                    question: "2⁵ × 4³ ÷ 8² มีค่าเท่าใด?",
+                    expression: "2⁵ × 4³ ÷ 8²",
+                    options: ["16", "32", "64", "128"],
+                    correct: 3,
+                    explanation: "2⁵ × (2²)³ ÷ (2³)² = 2⁵ × 2⁶ ÷ 2⁶ = 2⁵ = 32",
+                    hint: "เขียน 4 และ 8 ในรูปเลขยกกำลังฐาน 2",
+                    formulaUsed: "aᵐ × aⁿ = aᵐ⁺ⁿ และ aᵐ ÷ aⁿ = aᵐ⁻ⁿ",
+                    timeLimit: 70
+                }
+            ],
+            exam: [
+                {
+                    question: "จงหาค่าของ 2⁻³ + 3⁻²",
+                    expression: "2⁻³ + 3⁻²",
+                    options: ["1/72", "17/72", "5/36", "7/24"],
+                    correct: 1,
+                    explanation: "2⁻³ = 1/2³ = 1/8, 3⁻² = 1/3² = 1/9, 1/8 + 1/9 = 9/72 + 8/72 = 17/72",
+                    hint: "คำนวณแต่ละส่วนแยกกันแล้วบวกกัน",
+                    formulaUsed: "a⁻ⁿ = 1/aⁿ",
+                    timeLimit: 80
+                },
+                {
+                    question: "ถ้า 4ˣ = 64 แล้ว x มีค่าเท่าใด?",
+                    expression: "4ˣ = 64",
+                    options: ["2", "3", "4", "6"],
+                    correct: 1,
+                    explanation: "64 = 4³ ดังนั้น 4ˣ = 4³ → x = 3",
+                    hint: "เขียน 64 ในรูปเลขยกกำลังฐาน 4",
+                    formulaUsed: "ถ้า aᵐ = aⁿ แล้ว m = n",
+                    timeLimit: 50
+                },
+                {
+                    question: "4^(3/2) มีค่าเท่าใด?",
+                    expression: "4^(3/2)",
+                    options: ["2", "4", "8", "16"],
+                    correct: 2,
+                    explanation: "4^(3/2) = (4^(1/2))³ = (√4)³ = 2³ = 8",
+                    hint: "คำนวณรากที่สองของ 4 ก่อน แล้วยกกำลังสาม",
+                    formulaUsed: "a^(m/n) = (ⁿ√a)ᵐ",
+                    timeLimit: 60
+                },
+                {
+                    question: "100^(1/2) × 1000^(1/3)",
+                    expression: "100^(1/2) × 1000^(1/3)",
+                    options: ["10", "100", "1000", "1"],
+                    correct: 1,
+                    explanation: "100^(1/2) = √100 = 10\n1000^(1/3) = ³√1000 = 10\n10 × 10 = 100",
+                    hint: "เปลี่ยนให้อยู่ในรูปราก",
+                    formulaUsed: "a^(1/n) = ⁿ√a",
+                    timeLimit: 60
+                },
+                {
+                    question: "ข้อใดถูกต้อง?",
+                    expression: "พิจารณาข้อความ",
+                    options: ["2³ < 3²", "2⁴ = 4²", "(-2)² < -2²", "3⁰ = 0"],
+                    correct: 1,
+                    explanation: "ก. 8 < 9 (จริง), ข. 16 = 16 (จริง)\nแต่ตัวเลือก ข เป็นสมการที่ถูกต้องชัดเจนที่สุดในบริบทนี้\n(หมายเหตุ: โจทย์อาจมีคำตอบถูกหลายข้อ แต่ ข. คือ 2⁴=16, 4²=16 เท่ากันแน่นอน)",
+                    hint: "คำนวณค่าของแต่ละข้อ",
+                    formulaUsed: "การเปรียบเทียบ",
+                    timeLimit: 60
+                },
+                {
+                    question: "(3ⁿ⁺² - 3ⁿ⁺¹)/3ⁿ มีค่าเท่ากับเท่าใด?",
+                    expression: "(3ⁿ⁺² - 3ⁿ⁺¹)/3ⁿ",
+                    options: ["2", "3", "6", "9"],
+                    correct: 2,
+                    explanation: "(3ⁿ⁺² - 3ⁿ⁺¹)/3ⁿ = 3ⁿ(3² - 3¹)/3ⁿ = 9 - 3 = 6",
+                    hint: "แยกตัวประกอบร่วม 3ⁿ ออกมา",
+                    formulaUsed: "aᵐ⁺ⁿ = aᵐ × aⁿ",
+                    timeLimit: 70
+                },
+                {
+                    question: "9^(1.5) มีค่าเท่าใด?",
+                    expression: "9^(1.5)",
+                    options: ["3", "9", "18", "27"],
+                    correct: 3,
+                    explanation: "9^(1.5) = 9^(3/2) = (√9)³ = 3³ = 27",
+                    hint: "1.5 = 3/2",
+                    formulaUsed: "a^(m/n) = (ⁿ√a)ᵐ",
+                    timeLimit: 65
+                },
+                {
+                    question: "(1/2)⁻³ มีค่าเท่าใด?",
+                    expression: "(1/2)⁻³",
+                    options: ["-8", "-1/8", "1/8", "8"],
+                    correct: 3,
+                    explanation: "(1/2)⁻³ = (2/1)³ = 2³ = 8",
+                    hint: "(a/b)⁻ⁿ = (b/a)ⁿ",
+                    formulaUsed: "(a/b)⁻ⁿ = (b/a)ⁿ",
+                    timeLimit: 55
+                }
+            ]
+        };
+
+        // สถานะเกม
+        const gameState = {
+            mode: 'basic',
+            score: 0,
+            correct: 0,
+            wrong: 0,
+            time: 0,
+            currentQuestion: 0,
+            selectedAnswer: null,
+            isAnswered: false,
+            timer: null,
+            questions: [],
+            hintsUsed: 0,
+            maxHints: 3,
+            gameActive: true,
+            startTime: null,
+            achievements: [],
+            streak: 0,
+            maxStreak: 0
+        };
+
+        // DOM Elements
+        const gameArea = document.getElementById('gameArea');
+        const gameTitle = document.getElementById('gameTitle');
+        const scoreElement = document.getElementById('score');
+        const correctElement = document.getElementById('correct');
+        const wrongElement = document.getElementById('wrong');
+        const timeElement = document.getElementById('time');
+        const questionNumber = document.getElementById('questionNumber');
+        const questionText = document.getElementById('questionText');
+        const mathExpression = document.getElementById('mathExpression');
+        const optionsGrid = document.getElementById('optionsGrid');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const submitBtn = document.getElementById('submitBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const hintBtn = document.getElementById('hintBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const hintBox = document.getElementById('hintBox');
+        const hintContent = document.getElementById('hintContent');
+        const explanationBox = document.getElementById('explanationBox');
+        const explanationContent = document.getElementById('explanationContent');
+        const modeCards = document.querySelectorAll('.mode-card');
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            submitBtn.addEventListener('click', submitAnswer);
+            nextBtn.addEventListener('click', nextQuestion);
+            hintBtn.addEventListener('click', showHint);
+            restartBtn.addEventListener('click', initGame);
+            
+            modeCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // อัพเดท UI เลือกโหมด
+                    modeCards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    
+                    // เปลี่ยนโหมด
+                    gameState.mode = card.dataset.mode;
+                    
+                    // เริ่มเกมใหม่
+                    initGame();
+                });
+            });
+        }
+
+        // เริ่มเกม
+        function initGame() {
+            // รีเซ็ตค่าสถานะ
+            gameState.score = 0;
+            gameState.correct = 0;
+            gameState.wrong = 0;
+            gameState.time = 0;
+            gameState.currentQuestion = 0;
+            gameState.selectedAnswer = null;
+            gameState.isAnswered = false;
+            gameState.hintsUsed = 0;
+            gameState.gameActive = true;
+            gameState.streak = 0;
+            gameState.achievements = [];
+            
+            // เลือกคำถามตามโหมด
+            gameState.questions = [...questionData[gameState.mode]];
+            
+            // สลับลำดับคำถาม (Shuffle)
+            shuffleQuestions();
+            
+            // รีเซ็ตเวลา
+            if (gameState.timer) clearInterval(gameState.timer);
+            startTimer();
+            
+            // โหลดคำถามข้อแรก
+            loadQuestion();
+            
+            // อัพเดท UI
+            updateUI();
+            
+            // ซ่อน hint และ explanation
+            hintBox.classList.remove('show');
+            explanationBox.classList.remove('show');
+            
+            // เลื่อนหน้าจอไปที่ส่วนเกม
+            gameArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // สลับคำถาม
+        function shuffleQuestions() {
+            for (let i = gameState.questions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [gameState.questions[i], gameState.questions[j]] = [gameState.questions[j], gameState.questions[i]];
+            }
+        }
+
+        // โหลดคำถามปัจจุบัน
+        function loadQuestion() {
+            if (gameState.currentQuestion >= gameState.questions.length) {
+                endGame();
+                return;
+            }
+
+            const question = gameState.questions[gameState.currentQuestion];
+            
+            // อัพเดท UI
+            questionNumber.textContent = `ข้อที่ ${gameState.currentQuestion + 1}`;
+            questionText.textContent = question.question;
+            mathExpression.textContent = question.expression;
+            
+            // สร้างตัวเลือก
+            createOptions(question);
+            
+            // รีเซ็ตสถานะ
+            gameState.selectedAnswer = null;
+            gameState.isAnswered = false;
+            
+            // อัพเดทปุ่ม
+            submitBtn.disabled = true;
+            nextBtn.disabled = true;
+            hintBtn.disabled = false;
+            
+            // ซ่อน hint box และ explanation box
+            hintBox.classList.remove('show');
+            explanationBox.classList.remove('show');
+            
+            // อัพเดท progress
+            updateProgress();
+            
+            // เริ่มเวลาโจทย์ (ถ้ามี)
+            if (question.timeLimit) {
+                startQuestionTimer(question.timeLimit);
+            }
+        }
+
+        // สร้างตัวเลือก
+        function createOptions(question) {
+            optionsGrid.innerHTML = '';
+            const letters = ['A', 'B', 'C', 'D'];
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = option;
+                optionElement.dataset.index = index;
+                optionElement.dataset.letter = letters[index];
+                
+                optionElement.addEventListener('click', () => selectAnswer(index));
+                
+                optionsGrid.appendChild(optionElement);
+            });
+        }
+
+        // เลือกคำตอบ
+        function selectAnswer(index) {
+            if (gameState.isAnswered || !gameState.gameActive) return;
+            
+            // ล้างการเลือกเดิม
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // เลือกคำตอบใหม่
+            const selectedOption = document.querySelector(`.option[data-index="${index}"]`);
+            selectedOption.classList.add('selected');
+            
+            gameState.selectedAnswer = index;
+            submitBtn.disabled = false;
+        }
+
+        // ส่งคำตอบ
+        function submitAnswer() {
+            if (gameState.isAnswered || gameState.selectedAnswer === null || !gameState.gameActive) return;
+            
+            const question = gameState.questions[gameState.currentQuestion];
+            const isCorrect = gameState.selectedAnswer === question.correct;
+
+            // ==========================================
+            // [ใหม่] ส่วนที่เพิ่ม: เล่นเสียงเมื่อตอบผิด
+            // ==========================================
+            if (!isCorrect) {
+                // ไฟล์เสียง Screen-Recording-2026-02-13-215356.mp3
+                const wrongSound = new Audio('Screen-Recording-2026-02-13-215356.mp3');
+                wrongSound.volume = 0.8; 
+                wrongSound.play().catch(e => console.error("ไม่สามารถเล่นเสียงได้:", e));
+            }
+            // ==========================================
+
+            // แสดงผลคำตอบ
+            showAnswerResult(question, isCorrect);
+            
+            // อัพเดทคะแนนและสถิติ
+            updateScoreAndStats(isCorrect, question);
+            
+            // แสดงคำอธิบาย
+            showExplanation(question);
+            
+            // อัพเดท UI
+            updateUI();
+            
+            // เปิดใช้งานปุ่มข้อต่อไป
+            nextBtn.disabled = false;
+            submitBtn.disabled = true;
+            hintBtn.disabled = true;
+
+            // อัพเดท streak
+            if (isCorrect) {
+                gameState.streak++;
+                if (gameState.streak > gameState.maxStreak) {
+                    gameState.maxStreak = gameState.streak;
+                }
+            } else {
+                gameState.streak = 0;
+            }
+
+            // ตรวจสอบ achievements
+            checkAchievements();
+        }
+
+        // แสดงผลคำตอบ
+        function showAnswerResult(question, isCorrect) {
+            gameState.isAnswered = true;
+            
+            const options = document.querySelectorAll('.option');
+            
+            // แสดงเฉลย
+            options.forEach((opt, index) => {
+                opt.classList.remove('selected');
+                
+                if (index === question.correct) {
+                    opt.classList.add('correct');
+                } else if (index === gameState.selectedAnswer && !isCorrect) {
+                    opt.classList.add('incorrect');
+                }
+                
+                // ปิดการคลิก
+                opt.style.pointerEvents = 'none';
+            });
+        }
+
+        // อัพเดทคะแนนและสถิติ
+        function updateScoreAndStats(isCorrect, question) {
+            if (isCorrect) {
+                gameState.correct++;
+                // คำนวณคะแนนตามเวลาที่เหลือและความยาก
+                const baseScore = 10;
+                const difficultyMultiplier = {
+                    basic: 1,
+                    algebra: 1.5,
+                    challenge: 2,
+                    exam: 2.5
+                };
+                
+                gameState.score += Math.round(baseScore * difficultyMultiplier[gameState.mode]);
+                
+                // Bonus Streak
+                if (gameState.streak > 2) {
+                    gameState.score += gameState.streak * 2;
+                }
+            } else {
+                gameState.wrong++;
+            }
+        }
+
+        // แสดงคำอธิบาย
+        function showExplanation(question) {
+            explanationContent.innerHTML = `
+                <div style="margin-bottom: 10px;"><strong>ผลลัพธ์:</strong> ${question.correct === gameState.selectedAnswer ? '<span style="color:var(--success)">ถูกต้อง! เก่งมาก</span>' : '<span style="color:var(--accent)">ผิดจ้า พยายามใหม่นะ</span>'}</div>
+                <div class="step"><strong>เฉลย:</strong> ${question.explanation}</div>
+                <div style="font-size: 0.9rem; color: #666; margin-top: 10px;">สูตรที่ใช้: ${question.formulaUsed}</div>
+            `;
+            explanationBox.classList.add('show');
+        }
+
+        // ไปยังข้อถัดไป
+        function nextQuestion() {
+            gameState.currentQuestion++;
+            if (gameState.currentQuestion < gameState.questions.length) {
+                loadQuestion();
+            } else {
+                endGame();
+            }
+        }
+
+        // แสดงคำใบ้
+        function showHint() {
+            if (gameState.hintsUsed >= gameState.maxHints || gameState.isAnswered || !gameState.gameActive) {
+                return;
+            }
+            
+            const question = gameState.questions[gameState.currentQuestion];
+            gameState.hintsUsed++;
+            
+            hintContent.textContent = question.hint;
+            hintBox.classList.add('show');
+            
+            // อัพเดทปุ่ม hint
+            hintBtn.innerHTML = `<i class="fas fa-lightbulb"></i> คำใบ้ (เหลือ ${gameState.maxHints - gameState.hintsUsed} ครั้ง)`;
+            
+            // ลดคะแนนสำหรับการใช้คำใบ้
+            gameState.score = Math.max(0, gameState.score - 3);
+            
+            updateUI();
+            
+            // ถ้าใช้คำใบ้ครบแล้ว
+            if (gameState.hintsUsed >= gameState.maxHints) {
+                hintBtn.disabled = true;
+            }
+        }
+
+        // เริ่มจับเวลา
+        function startTimer() {
+            if (gameState.timer) {
+                clearInterval(gameState.timer);
+            }
+            
+            gameState.timer = setInterval(() => {
+                if (gameState.gameActive) {
+                    gameState.time++;
+                    updateUI();
+                }
+            }, 1000);
+        }
+
+        // เริ่มเวลาโจทย์
+        function startQuestionTimer(seconds) {
+            // ฟังก์ชันนี้สามารถเพิ่มได้ถ้าต้องการจำกัดเวลาแต่ละข้อ
+        }
+
+        // อัพเดท UI
+        function updateUI() {
+            scoreElement.textContent = gameState.score;
+            correctElement.textContent = gameState.correct;
+            wrongElement.textContent = gameState.wrong;
+            timeElement.textContent = gameState.time;
+            
+            // อัพเดทชื่อโหมด
+            const modeNames = {
+                basic: "พื้นฐานเลขยกกำลัง",
+                algebra: "พีชคณิตกับเลขยกกำลัง",
+                challenge: "โจทย์ท้าทาย",
+                exam: "แบบทดสอบปลายภาค"
+            };
+            gameTitle.textContent = modeNames[gameState.mode];
+            
+            // อัพเดท hint button
+            hintBtn.innerHTML = `<i class="fas fa-lightbulb"></i> คำใบ้ (เหลือ ${gameState.maxHints - gameState.hintsUsed} ครั้ง)`;
+        }
+
+        // อัพเดทความคืบหน้า
+        function updateProgress() {
+            const progress = ((gameState.currentQuestion) / gameState.questions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${gameState.currentQuestion}/${gameState.questions.length}`;
+        }
+
+        // จบเกม
+        function endGame() {
+            gameState.gameActive = false;
+            if (gameState.timer) {
+                clearInterval(gameState.timer);
+                gameState.timer = null;
+            }
+            
+            // คำนวณคะแนนโบนัส
+            calculateBonus();
+            
+            // แสดงผลลัพธ์
+            showResult();
+            
+            // สร้าง confetti ถ้าคะแนนสูง
+            if (gameState.score >= 80) {
+                createConfetti();
+            }
+        }
+
+        // คำนวณโบนัส
+        function calculateBonus() {
+            // โบนัสเวลารวดเร็ว
+            const timeBonus = Math.max(0, 300 - gameState.time);
+            gameState.score += Math.floor(timeBonus / 10);
+            
+            // โบนัสความแม่นยำ
+            const accuracy = (gameState.correct / gameState.questions.length) * 100;
+            if (accuracy >= 90) {
+                gameState.score += 50;
+                gameState.achievements.push("แม่นยำขั้นเทพ (90%+)");
+            } else if (accuracy === 100) {
+                gameState.score += 100;
+                gameState.achievements.push("สมบูรณ์แบบ (100%)");
+            }
+        }
+
+        // แสดงหน้าจอผลลัพธ์
+        function showResult() {
+            const accuracy = Math.round((gameState.correct / gameState.questions.length) * 100) || 0;
+            
+            const resultHTML = `
+                <div class="result-screen">
+                    <h2 class="result-title">จบเกมแล้ว!</h2>
+                    <div class="result-score">${gameState.score}</div>
+                    <div class="result-message">
+                        ${getResultMessage(accuracy)}
+                    </div>
+                    
+                    <div class="result-stats">
+                        <div class="result-stat">
+                            <div class="stat-value" style="color: var(--success)">${gameState.correct}</div>
+                            <div class="stat-label">ตอบถูก</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="stat-value" style="color: var(--accent)">${gameState.wrong}</div>
+                            <div class="stat-label">ตอบผิด</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="stat-value" style="color: var(--primary)">${accuracy}%</div>
+                            <div class="stat-label">ความแม่นยำ</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="stat-value" style="color: var(--warning)">${gameState.time}s</div>
+                            <div class="stat-label">เวลาที่ใช้</div>
+                        </div>
+                    </div>
+                    
+                    <div class="accuracy-bar">
+                        <div class="accuracy-fill" style="width: ${accuracy}%"></div>
+                    </div>
+                    
+                    ${gameState.achievements.length > 0 ? `
+                    <div style="margin: 30px 0;">
+                        <h3 style="color: var(--secondary); margin-bottom: 15px;">🏆 ความสำเร็จ:</h3>
+                        ${gameState.achievements.map(ach => `<span class="achievement">${ach}</span>`).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    <div style="margin: 30px 0;">
+                        <h3 style="color: var(--secondary); margin-bottom: 15px;">📊 สรุปผล:</h3>
+                        <p style="color: #666; font-size: 1.1rem;">
+                            ตอบถูก ${gameState.correct} จาก ${gameState.questions.length} ข้อ<br>
+                            ตอบติดต่อกันสูงสุด: ${gameState.maxStreak} ข้อ<br>
+                            ใช้คำใบ้: ${gameState.hintsUsed} ครั้ง
+                        </p>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="btn btn-success" id="playAgainBtn">
+                            <i class="fas fa-play-circle"></i> เล่นอีกครั้ง
+                        </button>
+                        <button class="btn btn-primary" id="changeModeBtn">
+                            <i class="fas fa-exchange-alt"></i> เปลี่ยนโหมด
+                        </button>
+                         <button class="btn btn-accent" id="reviewBtn">
+                            <i class="fas fa-book-open"></i> ทบทวนสูตร
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            gameArea.innerHTML = resultHTML;
+            
+            // เพิ่ม event listeners สำหรับปุ่มผลลัพธ์
+            document.getElementById('playAgainBtn').addEventListener('click', () => {
+                initGame();
+                setTimeout(() => {
+                    location.reload(); 
+                }, 100);
+            });
+            
+            document.getElementById('changeModeBtn').addEventListener('click', () => {
+                location.reload(); // รีโหลดเพื่อกลับไปหน้าเลือกโหมด
+            });
+            
+             document.getElementById('reviewBtn').addEventListener('click', () => {
+                 document.querySelector('.formula-box').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+        
+        // สร้าง Confetti (เอฟเฟกต์กระดาษโปรย)
+        function createConfetti() {
+            const colors = ['#e74c3c', '#3498db', '#f1c40f', '#2ecc71', '#9b59b6'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.top = '-10px';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.zIndex = '9999';
+                confetti.style.pointerEvents = 'none';
+                
+                const duration = Math.random() * 3 + 2;
+                confetti.style.animation = `fall ${duration}s linear forwards`;
+                
+                document.body.appendChild(confetti);
+                
+                // ลบเมื่อตกถึงพื้น
+                setTimeout(() => {
+                    confetti.remove();
+                }, duration * 1000);
+            }
+            
+            // เพิ่ม keyframe ถ้ายังไม่มี
+            if (!document.getElementById('confettiStyle')) {
+                const style = document.createElement('style');
+                style.id = 'confettiStyle';
+                style.innerHTML = `
+                    @keyframes fall {
+                        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                        100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // ตรวจสอบ Achievements
+        function checkAchievements() {
+            // Streak achievements
+            if (gameState.streak === 5) {
+                if (!gameState.achievements.includes("5 ตอบติดต่อกัน")) {
+                    gameState.achievements.push("5 ตอบติดต่อกัน");
+                }
+            } else if (gameState.streak === 10) {
+                 if (!gameState.achievements.includes("10 ตอบติดต่อกัน")) {
+                    gameState.achievements.push("10 ตอบติดต่อกัน");
+                }
+            }
+            
+            // Score achievements
+            if (gameState.score >= 100) {
+                 if (!gameState.achievements.includes("100 คะแนน")) {
+                    gameState.achievements.push("100 คะแนน");
+                }
+            }
+        }
+
+        // ฟังก์ชันช่วยเหลือ
+        function getResultMessage(accuracy) {
+            if (accuracy === 100) {
+                return "ยอดเยี่ยมมาก! 🏆 คุณตอบถูกทุกข้อ แสดงว่าคุณเชี่ยวชาญเรื่องเลขยกกำลังระดับ ม.4 แล้ว";
+            } else if (accuracy >= 80) {
+                return "ดีมาก! ⭐ คุณมีความเข้าใจเรื่องเลขยกกำลังเป็นอย่างดี เก่งมาก!";
+            } else if (accuracy >= 60) {
+                return "ดี! 👍 คุณมีความเข้าใจพื้นฐานดี แต่ยังมีบางจุดที่ควรทบทวนเพิ่มเติม";
+            } else {
+                return "ไม่ต้องเสียใจ! 💪 การฝึกฝนจะทำให้เก่งขึ้น ลองทบทวนสูตรแล้วเล่นใหม่อีกครั้งนะ";
+            }
+        }
+
+        // กำหนด event listeners เมื่อโหลดหน้าเว็บ
+        window.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            initGame();
+        });
+
+        // เพิ่ม keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (!gameState.gameActive) return;
+            
+            switch(e.key) {
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                    const index = parseInt(e.key) - 1;
+                    if (index >= 0 && index < 4) {
+                        selectAnswer(index);
+                    }
+                    break;
+                case 'Enter':
+                    if (!gameState.isAnswered && gameState.selectedAnswer !== null) {
+                        submitAnswer();
+                    } else if (gameState.isAnswered) {
+                        nextQuestion();
+                    }
+                    break;
+                case ' ':
+                    if (!gameState.isAnswered) {
+                        showHint();
+                    }
+                    break;
+                case 'r':
+                case 'R':
+                    initGame();
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>
