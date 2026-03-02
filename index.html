@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ เกมท้าทายเลขยกกำลัง | ม.4</title>
+    <title>⚡ เกมท้าทายภาคตัดกรวย | ม.4</title>
     <!-- Font Awesome 6 (เหมือนเดิม) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- เปลี่ยนฟอนต์เป็น Prompt ให้อ่านง่ายและทันสมัย -->
@@ -721,7 +721,7 @@
                 <i class="fas fa-crown"></i> <!-- เปลี่ยนไอคอนเล็กน้อย -->
                 <h1>ARENA MATHS</h1>
             </div>
-            <div class="class-badge">⚡ ฝึกเลขยกกำลัง สนุกกว่าที่คิด ⚡</div>
+            <div class="class-badge">📐 ภาคตัดกรวย ม.4</div>
             <p class="subtitle">เสนอ ครูปภัสสร์รัตน์ ปรัชญลักษณ์</p>
         </header>
 
@@ -730,25 +730,25 @@
             <div class="mode-card active" data-mode="basic">
                 <div class="mode-icon"><i class="fas fa-school"></i></div>
                 <h3 class="mode-title">พื้นฐาน</h3>
-                <p class="mode-desc">ปูพื้นฐานเลขยกกำลัง ม.4</p>
+                <p class="mode-desc">ปูพื้นฐานวงกลม พาราโบลา วงรี ไฮเพอร์โบลา</p>
                 <span class="mode-difficulty easy">EASY</span>
             </div>
             <div class="mode-card" data-mode="algebra">
                 <div class="mode-icon"><i class="fas fa-brain"></i></div>
                 <h3 class="mode-title">พีชคณิต</h3>
-                <p class="mode-desc">ใช้สูตรจัดรูปเลขยกกำลัง</p>
+                <p class="mode-desc">จัดรูปสมการ พารามิเตอร์ต่างๆ</p>
                 <span class="mode-difficulty medium">NORMAL</span>
             </div>
             <div class="mode-card" data-mode="challenge">
                 <div class="mode-icon"><i class="fas fa-trophy"></i></div>
                 <h3 class="mode-title">ท้าทาย</h3>
-                <p class="mode-desc">โจทย์แข่งขัน สนุกมันส์</p>
+                <p class="mode-desc">โจทย์ประยุกต์ ท้าทาย</p>
                 <span class="mode-difficulty hard">HARD</span>
             </div>
             <div class="mode-card" data-mode="exam">
                 <div class="mode-icon"><i class="fas fa-file-alt"></i></div>
                 <h3 class="mode-title">ข้อสอบปลายภาค</h3>
-                <p class="mode-desc">รวมทุกแบบ จับเวลา</p>
+                <p class="mode-desc">รวมข้อสอบภาคตัดกรวย</p>
                 <span class="mode-difficulty expert">VERY HARD</span>
             </div>
         </div>
@@ -756,7 +756,7 @@
         <!-- พื้นที่เกม (id,คลาสคงเดิม) -->
         <div class="game-area" id="gameArea">
             <div class="game-header">
-                <h2 class="game-title"><i class="fas fa-bolt"></i> <span id="gameTitle">พื้นฐานเลขยกกำลัง</span></h2>
+                <h2 class="game-title"><i class="fas fa-bolt"></i> <span id="gameTitle">พื้นฐานภาคตัดกรวย</span></h2>
                 <div class="stats">
                     <div class="stat-box"><i class="fas fa-star"></i><div><div class="stat-value" id="score">0</div><div class="stat-label">คะแนน</div></div></div>
                     <div class="stat-box"><i class="fas fa-check-circle"></i><div><div class="stat-value" id="correct">0</div><div class="stat-label">ถูก</div></div></div>
@@ -790,74 +790,331 @@
             </div>
         </div>
 
-        <!-- กล่องสูตร (เนื้อหาเดิม) -->
+        <!-- กล่องสูตร (เนื้อหาใหม่เป็นภาคตัดกรวย) -->
         <div class="formula-box">
-            <h3 class="formula-title"><i class="fas fa-book-open"></i> สูตรจำเป็นสำหรับ ม.4</h3>
+            <h3 class="formula-title"><i class="fas fa-book-open"></i> สูตรจำเป็นภาคตัดกรวย ม.4</h3>
             <div class="formulas-grid">
-                <div class="formula-item">1. aᵐ × aⁿ = aᵐ⁺ⁿ</div>
-                <div class="formula-item">2. aᵐ ÷ aⁿ = aᵐ⁻ⁿ</div>
-                <div class="formula-item">3. (aᵐ)ⁿ = aᵐⁿ</div>
-                <div class="formula-item">4. (ab)ⁿ = aⁿbⁿ</div>
-                <div class="formula-item">5. (a/b)ⁿ = aⁿ/bⁿ</div>
-                <div class="formula-item">6. a⁻ⁿ = 1/aⁿ</div>
-                <div class="formula-item">7. a⁰ = 1 (a≠0)</div>
-                <div class="formula-item">8. a^(m/n) = ⁿ√(aᵐ)</div>
-                <div class="formula-item">9. a^(1/n) = ⁿ√a</div>
-                <div class="formula-item">10. √(a²) = |a|</div>
-                <div class="formula-item">11. a⁻ᵐ/ⁿ = 1/(ⁿ√(aᵐ))</div>
-                <div class="formula-item">12. a¹ = a</div>
+                <div class="formula-item">1. วงกลม: (x - h)² + (y - k)² = r²</div>
+                <div class="formula-item">2. จุดศูนย์กลาง (h, k), รัศมี r</div>
+                <div class="formula-item">3. พาราโบลา: (y - k)² = 4c(x - h) (แนวนอน)</div>
+                <div class="formula-item">4. จุดยอด (h, k), โฟกัส (h+c, k), ไดเรกตริกซ์ x = h - c</div>
+                <div class="formula-item">5. พาราโบลา: (x - h)² = 4c(y - k) (แนวตั้ง)</div>
+                <div class="formula-item">6. วงรี: (x-h)²/a² + (y-k)²/b² = 1 (a≥b)</div>
+                <div class="formula-item">7. จุดศูนย์กลาง (h,k), แกนเอกยาว 2a, แกนโทยาว 2b</div>
+                <div class="formula-item">8. c² = a² - b² (วงรีตามแกน X)</div>
+                <div class="formula-item">9. ไฮเพอร์โบลา: (x-h)²/a² - (y-k)²/b² = 1</div>
+                <div class="formula-item">10. c² = a² + b², โฟกัส (h±c, k)</div>
+                <div class="formula-item">11. ไฮเพอร์โบลา: (y-k)²/a² - (x-h)²/b² = 1</div>
+                <div class="formula-item">12. เส้นกำกับ: y-k = ±(b/a)(x-h)</div>
             </div>
             <div style="margin-top:25px; padding:15px; background:#faedd2; border-radius:40px; border-left:8px solid #e67e22;">
                 <i class="fas fa-exclamation-triangle" style="color:#d68910;"></i> 
-                <strong>ข้อควรระวัง:</strong> 0⁰ ไม่นิยาม และฐานต้องเป็นจำนวนจริง
+                <strong>ข้อควรระวัง:</strong> วงกลมต้อง r > 0, วงรี a ≥ b > 0, ไฮเพอร์โบลา a,b > 0
             </div>
         </div>
     </div>
 
-    <!-- JavaScript (เหมือนเดิมทุกประการ) -->
+    <!-- JavaScript (ปรับ questionData เป็นภาคตัดกรวย) -->
     <script>
-        // ข้อมูลคำถามสำหรับแต่ละโหมด (copy from original)
+        // ข้อมูลคำถามสำหรับแต่ละโหมด (เปลี่ยนเป็นภาคตัดกรวย)
         const questionData = {
             basic: [
-                { question: "ข้อใดมีค่าเท่ากับ 2⁵?", expression: "2⁵", options: ["10", "25", "32", "64"], correct: 2, explanation: "2⁵ หมายถึง 2 คูณกัน 5 ตัว คือ 2 × 2 × 2 × 2 × 2 = 32", hint: "2 × 2 = 4, 4 × 2 = 8, ...", formulaUsed: "aⁿ = a × a × ... × a (n ครั้ง)", timeLimit: 30 },
-                { question: "3² × 3³ มีค่าเท่ากับข้อใด?", expression: "3² × 3³", options: ["3⁵", "3⁶", "9⁵", "9⁶"], correct: 0, explanation: "ตามสูตร aᵐ × aⁿ = aᵐ⁺ⁿ ดังนั้น 3² × 3³ = 3²⁺³ = 3⁵", hint: "ฐานเดียวกันให้นำเลขชี้กำลังมาบวกกัน", formulaUsed: "aᵐ × aⁿ = aᵐ⁺ⁿ", timeLimit: 35 },
-                { question: "5⁴ ÷ 5² มีค่าเท่ากับข้อใด?", expression: "5⁴ ÷ 5²", options: ["1", "5²", "5⁶", "25"], correct: 1, explanation: "ตามสูตร aᵐ ÷ aⁿ = aᵐ⁻ⁿ ดังนั้น 5⁴ ÷ 5² = 5⁴⁻² = 5² = 25", hint: "ฐานเดียวกันให้นำเลขชี้กำลังมาลบกัน", formulaUsed: "aᵐ ÷ aⁿ = aᵐ⁻ⁿ", timeLimit: 40 },
-                { question: "(2³)² มีค่าเท่ากับข้อใด?", expression: "(2³)²", options: ["2⁵", "2⁶", "4⁶", "4⁵"], correct: 1, explanation: "ตามสูตร (aᵐ)ⁿ = aᵐⁿ ดังนั้น (2³)² = 2³×² = 2⁶ = 64", hint: "เลขยกกำลังซ้อนกันให้นำเลขชี้กำลังมาคูณกัน", formulaUsed: "(aᵐ)ⁿ = aᵐⁿ", timeLimit: 45 },
-                { question: "10⁻² มีค่าเท่ากับเท่าใด?", expression: "10⁻²", options: ["-100", "-0.01", "0.01", "100"], correct: 2, explanation: "ตามสูตร a⁻ⁿ = 1/aⁿ ดังนั้น 10⁻² = 1/10² = 1/100 = 0.01", hint: "เลขชี้กำลังติดลบให้กลับเศษเป็นส่วน", formulaUsed: "a⁻ⁿ = 1/aⁿ", timeLimit: 50 },
-                { question: "4³ มีค่าเท่ากับเท่าใด?", expression: "4³", options: ["12", "16", "64", "256"], correct: 2, explanation: "4³ = 4 × 4 × 4 = 64", hint: "4³ = 4² × 4 = 16 × 4 = 64", formulaUsed: "aⁿ = a × a × ... × a (n ครั้ง)", timeLimit: 35 },
-                { question: "8² มีค่าเท่ากับเท่าใด?", expression: "8²", options: ["16", "64", "128", "256"], correct: 1, explanation: "8² = 8 × 8 = 64", hint: "8 × 8 = 64", formulaUsed: "aⁿ = a × a × ... × a (n ครั้ง)", timeLimit: 30 },
-                { question: "(-3)² มีค่าเท่ากับเท่าใด?", expression: "(-3)²", options: ["-6", "-9", "6", "9"], correct: 3, explanation: "(-3)² = (-3) × (-3) = 9 (ลบคูณลบเป็นบวก)", hint: "จำนวนลบยกกำลังคู่จะได้ค่าบวก", formulaUsed: "(-a)²ⁿ = a²ⁿ", timeLimit: 40 },
-                { question: "-3² มีค่าเท่ากับเท่าใด?", expression: "-3²", options: ["-6", "-9", "6", "9"], correct: 1, explanation: "-3² = -(3 × 3) = -9 (สังเกตว่าเครื่องหมายลบอยู่นอกการยกกำลัง)", hint: "ยกกำลังก่อนแล้วค่อยติดลบ", formulaUsed: "-aⁿ ≠ (-a)ⁿ", timeLimit: 40 },
-                { question: "7⁰ มีค่าเท่ากับเท่าใด?", expression: "7⁰", options: ["0", "1", "7", "หาค่าไม่ได้"], correct: 1, explanation: "จำนวนใดๆ (ที่ไม่ใช่ศูนย์) ยกกำลังศูนย์เท่ากับ 1", hint: "a⁰ = 1 เมื่อ a ≠ 0", formulaUsed: "a⁰ = 1", timeLimit: 25 }
+                { 
+                    question: "วงกลม (x-2)² + (y+1)² = 9 มีจุดศูนย์กลางที่ใด?",
+                    expression: "(x-2)² + (y+1)² = 9",
+                    options: ["(2, -1)", "(-2, 1)", "(2, 1)", "(-2, -1)"],
+                    correct: 0,
+                    explanation: "รูปแบบมาตรฐาน (x-h)² + (y-k)² = r² ดังนั้น h=2, k=-1 จุดศูนย์กลางคือ (2, -1)",
+                    hint: "เทียบกับ (x-h)² + (y-k)² = r²",
+                    formulaUsed: "วงกลม (x-h)² + (y-k)² = r²",
+                    timeLimit: 30
+                },
+                { 
+                    question: "วงกลม (x-2)² + (y+1)² = 9 มีรัศมีเท่าใด?",
+                    expression: "(x-2)² + (y+1)² = 9",
+                    options: ["3", "9", "81", "√9"],
+                    correct: 0,
+                    explanation: "r² = 9 ดังนั้น r = 3",
+                    hint: "r² = 9, r = √9",
+                    formulaUsed: "รัศมี r = √(r²)",
+                    timeLimit: 30
+                },
+                { 
+                    question: "พาราโบลา (y-3)² = 8(x+2) มีจุดยอดที่ใด?",
+                    expression: "(y-3)² = 8(x+2)",
+                    options: ["(2, -3)", "(-2, 3)", "(3, -2)", "(-3, 2)"],
+                    correct: 1,
+                    explanation: "รูปแบบ (y-k)² = 4c(x-h) จุดยอด (h, k) = (-2, 3)",
+                    hint: "เทียบกับ (y-k)² = 4c(x-h)",
+                    formulaUsed: "พาราโบลาแนวนอน จุดยอด (h, k)",
+                    timeLimit: 35
+                },
+                { 
+                    question: "พาราโบลา (y-3)² = 8(x+2) ค่า c เท่าใด?",
+                    expression: "(y-3)² = 8(x+2)",
+                    options: ["2", "4", "8", "16"],
+                    correct: 0,
+                    explanation: "4c = 8 → c = 2",
+                    hint: "เทียบกับ 4c = 8",
+                    formulaUsed: "4c = สัมประสิทธิ์หน้า (x-h)",
+                    timeLimit: 30
+                },
+                { 
+                    question: "วงรี (x-1)²/16 + (y+2)²/9 = 1 มีจุดศูนย์กลางที่ใด?",
+                    expression: "(x-1)²/16 + (y+2)²/9 = 1",
+                    options: ["(1, -2)", "(-1, 2)", "(1, 2)", "(-1, -2)"],
+                    correct: 0,
+                    explanation: "รูปแบบ (x-h)²/a² + (y-k)²/b² = 1 → (h, k) = (1, -2)",
+                    hint: "h = 1, k = -2",
+                    formulaUsed: "วงรี จุดศูนย์กลาง (h, k)",
+                    timeLimit: 30
+                },
+                { 
+                    question: "วงรี (x-1)²/16 + (y+2)²/9 = 1 มีค่า a เท่าใด?",
+                    expression: "(x-1)²/16 + (y+2)²/9 = 1",
+                    options: ["4", "3", "16", "9"],
+                    correct: 0,
+                    explanation: "a² = 16 → a = 4 (a ≥ b)",
+                    hint: "a² คือตัวส่วนใต้ x",
+                    formulaUsed: "a² = 16",
+                    timeLimit: 30
+                },
+                { 
+                    question: "ไฮเพอร์โบลา x²/25 - y²/16 = 1 มีจุดศูนย์กลางที่ใด?",
+                    expression: "x²/25 - y²/16 = 1",
+                    options: ["(0,0)", "(5,4)", "(25,16)", "(0,0)"],
+                    correct: 0,
+                    explanation: "ไม่มี (h,k) ดังนั้น (0,0)",
+                    hint: "รูปแบบ x²/a² - y²/b² = 1 คือ (0,0)",
+                    formulaUsed: "ไฮเพอร์โบลา จุดศูนย์กลาง (0,0)",
+                    timeLimit: 25
+                },
+                { 
+                    question: "ไฮเพอร์โบลา x²/25 - y²/16 = 1 มีค่า c เท่าใด?",
+                    expression: "x²/25 - y²/16 = 1",
+                    options: ["3", "4", "5", "√41"],
+                    correct: 3,
+                    explanation: "c² = a² + b² = 25+16=41 → c = √41",
+                    hint: "c² = a² + b²",
+                    formulaUsed: "c² = a² + b²",
+                    timeLimit: 35
+                }
             ],
             algebra: [
-                { question: "x³ × x⁴ มีค่าเท่ากับข้อใด?", expression: "x³ × x⁴", options: ["x⁷", "x¹²", "2x⁷", "x"], correct: 0, explanation: "ตามสูตร aᵐ × aⁿ = aᵐ⁺ⁿ ดังนั้น x³ × x⁴ = x³⁺⁴ = x⁷", hint: "ฐานเดียวกันให้นำเลขชี้กำลังมาบวกกัน", formulaUsed: "aᵐ × aⁿ = aᵐ⁺ⁿ", timeLimit: 35 },
-                { question: "(y²)³ มีค่าเท่ากับข้อใด?", expression: "(y²)³", options: ["y⁵", "y⁶", "y⁸", "y⁹"], correct: 1, explanation: "ตามสูตร (aᵐ)ⁿ = aᵐⁿ ดังนั้น (y²)³ = y²×³ = y⁶", hint: "เลขยกกำลังซ้อนกันให้นำเลขชี้กำลังมาคูณกัน", formulaUsed: "(aᵐ)ⁿ = aᵐⁿ", timeLimit: 40 },
-                { question: "b⁵ ÷ b² มีค่าเท่ากับข้อใด?", expression: "b⁵ ÷ b²", options: ["b³", "b⁷", "b¹⁰", "b².⁵"], correct: 0, explanation: "ตามสูตร aᵐ ÷ aⁿ = aᵐ⁻ⁿ ดังนั้น b⁵ ÷ b² = b⁵⁻² = b³", hint: "ฐานเดียวกันให้นำเลขชี้กำลังมาลบกัน", formulaUsed: "aᵐ ÷ aⁿ = aᵐ⁻ⁿ", timeLimit: 35 },
-                { question: "(3x)² มีค่าเท่ากับข้อใด?", expression: "(3x)²", options: ["3x²", "6x²", "9x²", "9x"], correct: 2, explanation: "ตามสูตร (ab)ⁿ = aⁿbⁿ ดังนั้น (3x)² = 3² × x² = 9x²", hint: "กระจายเลขชี้กำลังเข้าไปคูณทั้ง 3 และ x", formulaUsed: "(ab)ⁿ = aⁿbⁿ", timeLimit: 45 },
-                { question: "(a/b)³ มีค่าเท่ากับข้อใด?", expression: "(a/b)³", options: ["a³/b", "a/b³", "a³/b³", "3a/3b"], correct: 2, explanation: "ตามสูตร (a/b)ⁿ = aⁿ/bⁿ ดังนั้น (a/b)³ = a³/b³", hint: "กระจายเลขชี้กำลังเข้าไปทั้งเศษและส่วน", formulaUsed: "(a/b)ⁿ = aⁿ/bⁿ", timeLimit: 45 },
-                { question: "ข้อใดมีค่าเท่ากับ x⁻³?", expression: "x⁻³", options: ["-x³", "1/x³", "-1/x³", "-3x"], correct: 1, explanation: "ตามสูตร a⁻ⁿ = 1/aⁿ ดังนั้น x⁻³ = 1/x³", hint: "เลขชี้กำลังติดลบให้กลับเศษเป็นส่วน", formulaUsed: "a⁻ⁿ = 1/aⁿ", timeLimit: 40 },
-                { question: "(xy)⁰ มีค่าเท่ากับข้อใด (เมื่อ xy ≠ 0)?", expression: "(xy)⁰", options: ["0", "1", "xy", "x"], correct: 1, explanation: "จำนวนใดๆ (ที่ไม่ใช่ศูนย์) ยกกำลังศูนย์เท่ากับ 1", hint: "อะไรก็ตามยกกำลังศูนย์ได้ 1", formulaUsed: "a⁰ = 1", timeLimit: 30 },
-                { question: "(2a³)(3a²)", expression: "(2a³)(3a²)", options: ["5a⁵", "6a⁵", "6a⁶", "5a⁶"], correct: 1, explanation: "(2a³)(3a²) = (2×3)(a³×a²) = 6a³⁺² = 6a⁵", hint: "คูณสัมประสิทธิ์ก่อน แล้วคูณตัวแปรโดยนำเลขชี้กำลังมาบวกกัน", formulaUsed: "aᵐ × aⁿ = aᵐ⁺ⁿ", timeLimit: 50 }
+                { 
+                    question: "จงหาจุดศูนย์กลางของวงกลม x² + y² - 4x + 6y - 3 = 0",
+                    expression: "x² + y² - 4x + 6y - 3 = 0",
+                    options: ["(2, -3)", "(-2, 3)", "(2, 3)", "(-2, -3)"],
+                    correct: 0,
+                    explanation: "จัดรูป (x²-4x) + (y²+6y) = 3 → (x-2)² + (y+3)² = 16 จุดศูนย์กลาง (2, -3)",
+                    hint: "จัดกำลังสองสมบูรณ์",
+                    formulaUsed: "วงกลมจากรูปทั่วไป",
+                    timeLimit: 50
+                },
+                { 
+                    question: "รัศมีของวงกลม x² + y² - 4x + 6y - 3 = 0 เท่าใด?",
+                    expression: "x² + y² - 4x + 6y - 3 = 0",
+                    options: ["4", "5", "16", "25"],
+                    correct: 0,
+                    explanation: "จาก (x-2)² + (y+3)² = 16 → r = 4",
+                    hint: "r² = 16",
+                    formulaUsed: "รัศมี = √(r²)",
+                    timeLimit: 40
+                },
+                { 
+                    question: "พาราโบลา y² - 8x - 6y + 9 = 0 มีจุดยอดที่ใด?",
+                    expression: "y² - 8x - 6y + 9 = 0",
+                    options: ["(0,3)", "(1,3)", "(3,0)", "(3,1)"],
+                    correct: 0,
+                    explanation: "จัดรูป (y²-6y) = 8x - 9 → (y-3)² = 8x → จุดยอด (0,3)",
+                    hint: "จัดกำลังสองสมบูรณ์เทอม y",
+                    formulaUsed: "พาราโบลา",
+                    timeLimit: 55
+                },
+                { 
+                    question: "ค่า c ของพาราโบลา y² - 8x - 6y + 9 = 0 เท่าใด?",
+                    expression: "y² - 8x - 6y + 9 = 0",
+                    options: ["2", "4", "8", "16"],
+                    correct: 0,
+                    explanation: "จาก (y-3)² = 8x → 4c = 8 → c = 2",
+                    hint: "4c = 8",
+                    formulaUsed: "4c = สัมประสิทธิ์หน้า x",
+                    timeLimit: 40
+                },
+                { 
+                    question: "วงรี 9x² + 4y² - 36x + 8y + 4 = 0 มีจุดศูนย์กลางที่ใด?",
+                    expression: "9x² + 4y² - 36x + 8y + 4 = 0",
+                    options: ["(2, -1)", "(-2, 1)", "(2, 1)", "(-2, -1)"],
+                    correct: 0,
+                    explanation: "จัดกลุ่ม 9(x²-4x) + 4(y²+2y) = -4 → 9(x-2)² + 4(y+1)² = 36 → (x-2)²/4 + (y+1)²/9 = 1 → จุดศูนย์กลาง (2, -1)",
+                    hint: "จัดกำลังสองสมบูรณ์",
+                    formulaUsed: "วงรีจากรูปทั่วไป",
+                    timeLimit: 60
+                },
+                { 
+                    question: "ไฮเพอร์โบลา 4x² - 9y² - 16x - 18y - 29 = 0 มีจุดศูนย์กลางที่ใด?",
+                    expression: "4x² - 9y² - 16x - 18y - 29 = 0",
+                    options: ["(2, -1)", "(-2, 1)", "(2, 1)", "(-2, -1)"],
+                    correct: 0,
+                    explanation: "จัดกลุ่ม 4(x²-4x) - 9(y²+2y) = 29 → 4(x-2)² - 9(y+1)² = 36 → (x-2)²/9 - (y+1)²/4 = 1 → จุดศูนย์กลาง (2, -1)",
+                    hint: "จัดกำลังสองสมบูรณ์",
+                    formulaUsed: "ไฮเพอร์โบลาจากรูปทั่วไป",
+                    timeLimit: 60
+                },
+                { 
+                    question: "สมการวงกลมที่มีจุดศูนย์กลาง (3,-2) และรัศมี 5 คือข้อใด?",
+                    expression: "เขียนสมการ",
+                    options: ["(x-3)²+(y+2)²=25", "(x+3)²+(y-2)²=25", "(x-3)²+(y-2)²=25", "(x+3)²+(y+2)²=25"],
+                    correct: 0,
+                    explanation: "(x-h)²+(y-k)² = r² → (x-3)²+(y+2)²=25",
+                    hint: "แทนค่า h=3, k=-2, r=5",
+                    formulaUsed: "วงกลม",
+                    timeLimit: 35
+                }
             ],
             challenge: [
-                { question: "ถ้า 2ˣ = 32 และ 3ʸ = 27 แล้ว x + y มีค่าเท่าใด?", expression: "x + y", options: ["7", "8", "9", "10"], correct: 1, explanation: "2ˣ = 32 = 2⁵ → x = 5\n3ʸ = 27 = 3³ → y = 3\nดังนั้น x + y = 5 + 3 = 8", hint: "หาค่า x และ y แยกกันก่อน", formulaUsed: "ถ้า aᵐ = aⁿ แล้ว m = n", timeLimit: 60 },
-                { question: "รากที่สองของ 4³ มีค่าเท่าใด?", expression: "√(4³)", options: ["4", "8", "16", "32"], correct: 1, explanation: "√(4³) = (4³)^(1/2) = 4^(3/2) = (√4)³ = 2³ = 8", hint: "ใช้สูตร √(aᵐ) = aᵐ/²", formulaUsed: "√(aᵐ) = aᵐ/²", timeLimit: 65 },
-                { question: "3² × 9³ ÷ 27² มีค่าเท่าใด?", expression: "3² × 9³ ÷ 27²", options: ["1", "3", "9", "27"], correct: 1, explanation: "3² × (3²)³ ÷ (3³)² = 3² × 3⁶ ÷ 3⁶ = 3² = 9", hint: "ทำให้ฐานทั้งหมดเป็น 3 ก่อน", formulaUsed: "aᵐ × aⁿ = aᵐ⁺ⁿ และ aᵐ ÷ aⁿ = aᵐ⁻ⁿ", timeLimit: 70 },
-                { question: "(5⁷ × 25²) ÷ 125³ มีค่าเท่าใด?", expression: "(5⁷ × 25²) ÷ 125³", options: ["1", "5", "25", "125"], correct: 2, explanation: "5⁷ × (5²)² ÷ (5³)³ = 5⁷ × 5⁴ ÷ 5⁹ = 5¹¹ ÷ 5⁹ = 5² = 25", hint: "เขียน 25 และ 125 ในรูปเลขยกกำลังฐาน 5", formulaUsed: "aᵐ × aⁿ = aᵐ⁺ⁿ และ aᵐ ÷ aⁿ = aᵐ⁻ⁿ", timeLimit: 75 },
-                { question: "8^(2/3) มีค่าเท่าใด?", expression: "8^(2/3)", options: ["2", "4", "8", "16"], correct: 1, explanation: "8^(2/3) = (8^(1/3))² = (³√8)² = 2² = 4", hint: "เปลี่ยน 8 เป็น 2³ แล้วคำนวณ", formulaUsed: "a^(m/n) = (ⁿ√a)ᵐ", timeLimit: 60 },
-                { question: "ข้อใดมีค่ามากที่สุด?", expression: "เปรียบเทียบค่า", options: ["2⁵⁰", "3⁴⁰", "4³⁰", "5²⁰"], correct: 1, explanation: "ทำเลขชี้กำลังให้เท่ากัน (หา ห.ร.ม. ของเลขชี้กำลังคือ 10)\n2⁵⁰ = (2⁵)¹⁰ = 32¹⁰\n3⁴⁰ = (3⁴)¹⁰ = 81¹⁰ (มากที่สุด)\n4³⁰ = (4³)¹⁰ = 64¹⁰\n5²⁰ = (5²)¹⁰ = 25¹⁰", hint: "ทำเลขชี้กำลังให้เท่ากันโดยดึงตัวร่วมออก", formulaUsed: "เปรียบเทียบโดยทำเลขชี้กำลังให้เท่ากัน", timeLimit: 90 },
-                { question: "2⁵ × 4³ ÷ 8² มีค่าเท่าใด?", expression: "2⁵ × 4³ ÷ 8²", options: ["16", "32", "64", "128"], correct: 3, explanation: "2⁵ × (2²)³ ÷ (2³)² = 2⁵ × 2⁶ ÷ 2⁶ = 2⁵ = 32", hint: "เขียน 4 และ 8 ในรูปเลขยกกำลังฐาน 2", formulaUsed: "aᵐ × aⁿ = aᵐ⁺ⁿ และ aᵐ ÷ aⁿ = aᵐ⁻ⁿ", timeLimit: 70 }
+                { 
+                    question: "วงกลมผ่านจุด (3,4) และมีจุดศูนย์กลางที่ (1,2) จะมีรัศมีเท่าใด?",
+                    expression: "ระยะทางระหว่างจุด",
+                    options: ["√8", "√10", "√12", "√20"],
+                    correct: 0,
+                    explanation: "r = √[(3-1)² + (4-2)²] = √(4+4) = √8",
+                    hint: "ใช้สูตรระยะทาง",
+                    formulaUsed: "ระยะทางระหว่างจุด",
+                    timeLimit: 45
+                },
+                { 
+                    question: "โฟกัสของพาราโบลา (y-2)² = 12(x+1) อยู่ที่ใด?",
+                    expression: "(y-2)² = 12(x+1)",
+                    options: ["(2,2)", "(3,2)", "(-1,2)", "(2,-1)"],
+                    correct: 0,
+                    explanation: "4c = 12 → c=3, จุดยอด (-1,2), โฟกัส (h+c, k) = (2,2)",
+                    hint: "โฟกัสอยู่ห่างจากจุดยอด c หน่วย",
+                    formulaUsed: "โฟกัสพาราโบลาแนวนอน",
+                    timeLimit: 40
+                },
+                { 
+                    question: "ไดเรกตริกซ์ของพาราโบลา (y-2)² = 12(x+1) คือเส้นใด?",
+                    expression: "(y-2)² = 12(x+1)",
+                    options: ["x = -4", "x = 2", "y = -4", "y = 2"],
+                    correct: 0,
+                    explanation: "จุดยอด (-1,2), c=3, ไดเรกตริกซ์ x = h - c = -1 - 3 = -4",
+                    hint: "ไดเรกตริกซ์ x = h - c",
+                    formulaUsed: "ไดเรกตริกซ์พาราโบลา",
+                    timeLimit: 40
+                },
+                { 
+                    question: "โฟกัสของวงรี (x-2)²/25 + (y+1)²/9 = 1 อยู่ที่ใด?",
+                    expression: "(x-2)²/25 + (y+1)²/9 = 1",
+                    options: ["(2±4, -1)", "(2±√16, -1)", "(2, -1±4)", "(2±√34, -1)"],
+                    correct: 0,
+                    explanation: "a²=25, b²=9 → c² = a² - b² = 16 → c=4, โฟกัส (h±c, k) = (2±4, -1)",
+                    hint: "c² = a² - b²",
+                    formulaUsed: "โฟกัสวงรี",
+                    timeLimit: 50
+                },
+                { 
+                    question: "ความยาวแกนเอกของวงรี 4x² + 9y² = 36 เท่าใด?",
+                    expression: "4x² + 9y² = 36",
+                    options: ["6", "4", "9", "12"],
+                    correct: 0,
+                    explanation: "หาร 36: x²/9 + y²/4 = 1 → a²=9 → a=3 → แกนเอกยาว 2a = 6",
+                    hint: "แกนเอกคือ 2a",
+                    formulaUsed: "วงรี",
+                    timeLimit: 40
+                },
+                { 
+                    question: "โฟกัสของไฮเพอร์โบลา x²/16 - y²/9 = 1 อยู่ที่ใด?",
+                    expression: "x²/16 - y²/9 = 1",
+                    options: ["(±5,0)", "(0,±5)", "(±√7,0)", "(0,±√7)"],
+                    correct: 0,
+                    explanation: "a²=16, b²=9 → c² = a²+b² = 25 → c=5 → โฟกัส (±5,0)",
+                    hint: "c² = a² + b²",
+                    formulaUsed: "โฟกัสไฮเพอร์โบลา",
+                    timeLimit: 40
+                },
+                { 
+                    question: "สมการของวงกลมที่มีเส้นผ่านศูนย์กลางจาก (1,2) ไป (5,6) คือ?",
+                    expression: "จุดปลายเส้นผ่านศูนย์กลาง",
+                    options: ["(x-3)²+(y-4)²=8", "(x-3)²+(y-4)²=16", "(x-3)²+(y-4)²=4", "(x-3)²+(y-4)²=2"],
+                    correct: 0,
+                    explanation: "จุดศูนย์กลาง = ((1+5)/2, (2+6)/2) = (3,4), r = ½√[(5-1)²+(6-2)²] = ½√(16+16)=½√32=√8 → r²=8",
+                    hint: "จุดศูนย์กลางคือ midpoint, รัศมีครึ่งหนึ่งของระยะทาง",
+                    formulaUsed: "วงกลม",
+                    timeLimit: 55
+                }
             ],
             exam: [
-                { question: "จงหาค่าของ 2⁻³ + 3⁻²", expression: "2⁻³ + 3⁻²", options: ["1/72", "17/72", "5/36", "7/24"], correct: 1, explanation: "2⁻³ = 1/2³ = 1/8, 3⁻² = 1/3² = 1/9, 1/8 + 1/9 = 9/72 + 8/72 = 17/72", hint: "คำนวณแต่ละส่วนแยกกันแล้วบวกกัน", formulaUsed: "a⁻ⁿ = 1/aⁿ", timeLimit: 80 },
-                { question: "ถ้า 4ˣ = 64 แล้ว x มีค่าเท่าใด?", expression: "4ˣ = 64", options: ["2", "3", "4", "6"], correct: 1, explanation: "64 = 4³ ดังนั้น 4ˣ = 4³ → x = 3", hint: "เขียน 64 ในรูปเลขยกกำลังฐาน 4", formulaUsed: "ถ้า aᵐ = aⁿ แล้ว m = n", timeLimit: 50 },
-                { question: "4^(3/2) มีค่าเท่าใด?", expression: "4^(3/2)", options: ["2", "4", "8", "16"], correct: 2, explanation: "4^(3/2) = (4^(1/2))³ = (√4)³ = 2³ = 8", hint: "คำนวณรากที่สองของ 4 ก่อน แล้วยกกำลังสาม", formulaUsed: "a^(m/n) = (ⁿ√a)ᵐ", timeLimit: 60 },
-                { question: "100^(1/2) × 1000^(1/3)", expression: "100^(1/2) × 1000^(1/3)", options: ["10", "100", "1000", "1"], correct: 1, explanation: "100^(1/2) = √100 = 10\n1000^(1/3) = ³√1000 = 10\n10 × 10 = 100", hint: "เปลี่ยนให้อยู่ในรูปราก", formulaUsed: "a^(1/n) = ⁿ√a", timeLimit: 60 },
-                { question: "ข้อใดถูกต้อง?", expression: "พิจารณาข้อความ", options: ["2³ < 3²", "2⁴ = 4²", "(-2)² < -2²", "3⁰ = 0"], correct: 1, explanation: "ก. 8 < 9 (จริง), ข. 16 = 16 (จริง)\nแต่ตัวเลือก ข เป็นสมการที่ถูกต้องชัดเจนที่สุดในบริบทนี้", hint: "คำนวณค่าของแต่ละข้อ", formulaUsed: "การเปรียบเทียบ", timeLimit: 60 },
-                { question: "(3ⁿ⁺² - 3ⁿ⁺¹)/3ⁿ มีค่าเท่ากับเท่าใด?", expression: "(3ⁿ⁺² - 3ⁿ⁺¹)/3ⁿ", options: ["2", "3", "6", "9"], correct: 2, explanation: "(3ⁿ⁺² - 3ⁿ⁺¹)/3ⁿ = 3ⁿ(3² - 3¹)/3ⁿ = 9 - 3 = 6", hint: "แยกตัวประกอบร่วม 3ⁿ ออกมา", formulaUsed: "aᵐ⁺ⁿ = aᵐ × aⁿ", timeLimit: 70 },
-                { question: "9^(1.5) มีค่าเท่าใด?", expression: "9^(1.5)", options: ["3", "9", "18", "27"], correct: 3, explanation: "9^(1.5) = 9^(3/2) = (√9)³ = 3³ = 27", hint: "1.5 = 3/2", formulaUsed: "a^(m/n) = (ⁿ√a)ᵐ", timeLimit: 65 },
-                { question: "(1/2)⁻³ มีค่าเท่าใด?", expression: "(1/2)⁻³", options: ["-8", "-1/8", "1/8", "8"], correct: 3, explanation: "(1/2)⁻³ = (2/1)³ = 2³ = 8", hint: "(a/b)⁻ⁿ = (b/a)ⁿ", formulaUsed: "(a/b)⁻ⁿ = (b/a)ⁿ", timeLimit: 55 }
+                { 
+                    question: "จุดยอดของพาราโบลา x = y² - 4y + 3 คือจุดใด?",
+                    expression: "x = y² - 4y + 3",
+                    options: ["(-1,2)", "(1,-2)", "(-1,-2)", "(1,2)"],
+                    correct: 0,
+                    explanation: "จัดรูป x = (y-2)² - 1 → (y-2)² = x+1 → จุดยอด (h,k) = (-1,2)",
+                    hint: "จัดกำลังสองสมบูรณ์เทอม y",
+                    formulaUsed: "พาราโบลาตะแคง",
+                    timeLimit: 50
+                },
+                { 
+                    question: "โฟกัสของพาราโบลา x = y² - 4y + 3 อยู่ที่ใด?",
+                    expression: "x = y² - 4y + 3",
+                    options: ["(-3/4, 2)", "(-1/4, 2)", "(1/4, 2)", "(3/4, 2)"],
+                    correct: 0,
+                    explanation: "จาก (y-2)² = x+1 → 4c = 1 → c = 1/4, จุดยอด (-1,2), โฟกัส (h+c, k) = (-1+1/4, 2) = (-3/4, 2)",
+                    hint: "4c = 1",
+                    formulaUsed: "โฟกัสพาราโบลา",
+                    timeLimit: 55
+                },
+                { 
+                    question: "วงรี 9x² + 25y² = 225 มีความเยื้องศูนย์กลางเท่าใด?",
+                    expression: "9x² + 25y² = 225",
+                    options: ["0.8", "0.6", "0.4", "0.2"],
+                    correct: 0,
+                    explanation: "หาร 225: x²/25 + y²/9 = 1 → a=5, b=3, c=√(25-9)=4, e=c/a=4/5=0.8",
+                    hint: "e = c/a",
+                    formulaUsed: "ความเยื้องศูนย์กลาง",
+                    timeLimit: 50
+                },
+                { 
+                    question: "สมการเส้นกำกับของไฮเพอร์โบลา 9x² - 16y² = 144 คือ?",
+                    expression: "9x² - 16y² = 144",
+                    options: ["y = ±(3/4)x", "y = ±(4/3)x", "y = ±(3/5)x", "y = ±(5/3)x"],
+                    correct: 0,
+                    explanation: "หาร 144: x²/16 - y²/9 = 1 → a=4, b=3 → เส้นกำกับ y = ±(b/a)x = ±(3/4)x",
+                    hint: "เส้นกำกับ y = ±(b/a)x",
+                    formulaUsed: "เส้นกำกับไฮเพอร์โบลา",
+                    timeLimit: 45
+                },
+                { 
+                    question: "จุดโฟกัสของไฮเพอร์โบลา 9x² - 16y² = 144 อยู่ที่ใด?",
+                    expression: "9x² - 16y² = 144",
+                    options: ["(±5,0)", "(0,±5)", "(±√7,0)", "(0,±√7)"],
+                    correct: 0,
+                    explanation: "x²/16 - y²/9 = 1 → a=4, b=3, c=√(16+9)=5 → โฟกัส (±5,0)",
+                    hint: "c² = a²+b²",
+                    formulaUsed: "โฟกัสไฮเพอร์โบลา",
+                    timeLimit: 45
+                },
+                { 
+                    question: "สมการวงกลมที่มีจุดศูนย์กลาง (2,-3) และสัมผัสแกน X คือ?",
+                    expression: "สัมผัสแกน X",
+                    options: ["(x-2)²+(y+3)²=9", "(x-2)²+(y+3)²=16", "(x-2)²+(y+3)²=4", "(x+2)²+(y-3)²=9"],
+                    correct: 0,
+                    explanation: "รัศมี = ระยะจากจุดศูนย์กลางถึงแกน X = |y-coordinate| = 3 → r²=9",
+                    hint: "สัมผัสแกน X หมายถึงระยะจากจุดศูนย์กลางถึงแกน X = r",
+                    formulaUsed: "วงกลม",
+                    timeLimit: 40
+                },
+                { 
+                    question: "สมการวงกลมที่มีจุดศูนย์กลาง (2,-3) และสัมผัสแกน Y คือ?",
+                    expression: "สัมผัสแกน Y",
+                    options: ["(x-2)²+(y+3)²=4", "(x-2)²+(y+3)²=9", "(x-2)²+(y+3)²=16", "(x+2)²+(y-3)²=4"],
+                    correct: 0,
+                    explanation: "รัศมี = ระยะจากจุดศูนย์กลางถึงแกน Y = |x-coordinate| = 2 → r²=4",
+                    hint: "สัมผัสแกน Y หมายถึงระยะถึงแกน Y = r",
+                    formulaUsed: "วงกลม",
+                    timeLimit: 40
+                }
             ]
         };
 
@@ -1041,7 +1298,7 @@
             correctElement.textContent = gameState.correct;
             wrongElement.textContent = gameState.wrong;
             timeElement.textContent = gameState.time;
-            const modeNames = { basic:"พื้นฐาน", algebra:"พีชคณิต", challenge:"ท้าทาย", exam:"ข้อสอบ" };
+            const modeNames = { basic:"พื้นฐานภาคตัดกรวย", algebra:"พีชคณิตภาคตัดกรวย", challenge:"ท้าทายภาคตัดกรวย", exam:"ข้อสอบภาคตัดกรวย" };
             gameTitle.textContent = modeNames[gameState.mode];
             hintBtn.innerHTML = `<i class="fas fa-lightbulb"></i> คำใบ้ (เหลือ ${gameState.maxHints - gameState.hintsUsed} ครั้ง)`;
         }
