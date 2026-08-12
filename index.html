@@ -118,13 +118,21 @@
     color:var(--muted);
     outline:none;
     min-width:0;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
     cursor:text;
+    white-space:normal;
+    word-break:break-word;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    line-height:1.25;
   }
   .name.named{color:var(--text);}
-  .name:focus{color:var(--text);white-space:normal;}
+  .name:focus{
+    color:var(--text);
+    -webkit-line-clamp:unset;
+    overflow:visible;
+  }
   .score{
     font-size:52px;
     font-weight:800;
@@ -335,15 +343,10 @@ document.getElementById('resetBtn').addEventListener('click', ()=>{
 
 loadState();
 
-// Block double-tap-to-zoom on iPad/iOS Safari, but never block rapid taps
-// on actual controls (buttons, +/-, etc).
+// Block double-tap-to-zoom on iPad/iOS Safari (viewport lock alone doesn't
+// always stop it on fast double taps).
 let lastTouchEnd = 0;
 document.addEventListener('touchend', function(e){
-  const isControl = e.target.closest('button, .circle-btn, [contenteditable="true"]');
-  if(isControl){
-    lastTouchEnd = 0;
-    return;
-  }
   const now = Date.now();
   if(now - lastTouchEnd <= 350){
     e.preventDefault();
